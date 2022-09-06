@@ -14,8 +14,13 @@ export class UsersService {
     return this.usersRepository.save(createUserDto);
   }
 
-  findAll() {
-    return this.usersRepository.find();
+  async findAll() {
+    const users = await this.usersRepository.find();
+    return users.map((u) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { pass, ...rest } = u;
+      return rest;
+    });
   }
 
   findByName(name: string) {

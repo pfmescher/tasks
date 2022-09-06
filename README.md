@@ -31,6 +31,7 @@
 ```bash
 $ npm install
 ```
+Run the dockerfile provided under db and seed the database by logging into it and running the script test_db.sql
 
 ## Running the app
 
@@ -45,29 +46,10 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Endpoints
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+All available endpoints listed under localhost:3000/swagger.
+To test, you should first log in with any of the seeded user/pass combinations.
+Admins can see all tasks in all statuses and can also CRUD users.
+Users can only see their own tasks and when requesting all tasks archived tasks will not be shown but they can be retrieved by ID.
+Valid task statuses are ToDo, inProgress, Done and Archived.

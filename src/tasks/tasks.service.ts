@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Not, Repository } from 'typeorm';
 import { Task, TaskStatus } from './entities/task.entity';
 import { User } from '../users/entities/user.entity';
-import { UpdateUserDto } from '../users/dto/update-user.dto';
 
 @Injectable()
 export class TasksService {
@@ -34,6 +33,7 @@ export class TasksService {
   }
 
   findByUser(user: User) {
+    console.log(JSON.stringify(user));
     return this.tasksRepository.find({
       where: {
         user,
