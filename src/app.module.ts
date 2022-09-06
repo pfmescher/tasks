@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Task } from './tasks/task.entity';
-import { User } from './users/user.entity';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { User } from './users/entities/user.entity';
+import { Task } from './tasks/entities/task.entity';
 
 @Module({
   imports: [
@@ -16,13 +18,19 @@ import { UsersModule } from './users/users.module';
       username: 'postgres',
       password: 'secret',
       database: 'postgres',
-      entities: [User, Task],
+      entities: [Task, User],
       synchronize: true,
     }),
     TasksModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
