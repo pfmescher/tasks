@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { User } from './users/entities/user.entity';
 import { Task } from './tasks/entities/task.entity';
+import { RolesGuard } from './auth/roles.guard';
 
 @Module({
   imports: [
@@ -30,6 +31,10 @@ import { Task } from './tasks/entities/task.entity';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })
